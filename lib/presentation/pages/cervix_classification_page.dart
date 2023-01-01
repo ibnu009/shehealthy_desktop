@@ -15,7 +15,6 @@ import '../components/dialog/dialog_component.dart';
 import '../components/dropdown/dropdown_value.dart';
 import '../components/dropdown/generic_dropdown.dart';
 import '../components/image/image_result.dart';
-import 'classification_detail_page.dart';
 
 class CervixClassificationPage extends StatefulWidget {
   final ClassificationBloc bloc;
@@ -140,7 +139,7 @@ class _CervixClassificationPageState extends State<CervixClassificationPage> {
                     return;
                   }
 
-                  widget.bloc.add(UploadClassification(file: image!));
+                  widget.bloc.add(UploadClassification(file: image!, classificationType: selectedItem));
                 },
                 text: 'Analisa'),
           ),

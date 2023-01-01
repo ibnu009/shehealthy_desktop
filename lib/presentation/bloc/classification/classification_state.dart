@@ -9,10 +9,14 @@ class ShowLoading extends ClassificationState {}
 class ShowIdle extends ClassificationState {}
 
 class ShowSuccessClassification extends ClassificationState {
-  String data;
-  String assumption;
+  final String data, assumption, classificationType;
   File image;
-  ShowSuccessClassification({required this.data, required this.assumption, required this.image});
+
+  ShowSuccessClassification(
+      {required this.data,
+      required this.assumption,
+      required this.image,
+      required this.classificationType});
 }
 
 class ShowFailedClassification extends ClassificationState {}

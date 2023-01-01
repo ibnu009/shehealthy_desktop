@@ -3,9 +3,9 @@ import 'dart:io';
 abstract class ClassificationEvent {}
 
 class UploadClassification extends ClassificationEvent {
-  File file;
-
-  UploadClassification({required this.file});
+  final File file;
+  final String classificationType;
+  UploadClassification({required this.file, required this.classificationType});
 }
 
 

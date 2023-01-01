@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import '../../presentation/components/dropdown/dropdown_value.dart';
 import '../data/response/classification_response.dart';
 import '../network/network_service.dart';
 
@@ -12,7 +13,8 @@ class ClassificationRepository extends NetworkService {
 
   ClassificationRepository._privateConstructor();
 
-  static final ClassificationRepository _instance = ClassificationRepository._privateConstructor();
+  static final ClassificationRepository _instance =
+      ClassificationRepository._privateConstructor();
 
   static ClassificationRepository get instance => _instance;
 
@@ -22,14 +24,18 @@ class ClassificationRepository extends NetworkService {
   final String token = "token";
 
   Future<ClassificationResponse> uploadClassification(
-      File file) async {
+      File file, String classificationType) async {
     String? readData = await storage.read(key: 'token') ?? "";
 
+    String url = '';
+    if (classificationType == classificationItem[1]) {
+      url = "$BASE_URL/classification_knn/";
+    } else {
+      url = "$BASE_URL/classification_cnn/";
+    }
+
     var header = {contentType: applicationJson, token: readData};
-    var map = await createClassificationPost(
-        "$BASE_URL/uploadfile/",
-        file: file,
-        header: header);
+    var map = await createClassificationPost(url, file: file, header: header);
 
     return ClassificationResponse.fromJson(map);
   }
